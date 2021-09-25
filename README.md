@@ -10,7 +10,7 @@
   
  Pwned-by is an open-source Python3 project that requires two files to function: one in the client and one in the server. The client file is pre-built to connect automatically with the server file when executed. It allows the server file to simulate a mini shell that executes the commands sent to the client from the server.
 
- This repository has limited commands yet. However, I have plans to upgrade the features like meterpreter. And then hide it in any file or something undetectable. This is also open for other people to change the banner to whatever you like. I request the use of the name "pwned by" for the project to become known.
+ This repository has limited commands yet. However, new codes will be injected everyday as a walkthough to understand the step-by-step procedure using python and some techniques like hiding it on any file or something undetectable. This is also open for other people to change the banner to whatever you like. I request the use of the name "pwned-by" for the project to become known.
 
 
 ie.
