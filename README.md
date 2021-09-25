@@ -2,7 +2,7 @@
 
   *** [Disclaimer] ***
   
- This project aims to understand ethical hacking techniques using python. The tests and procedures should only be executed on your own machines. If you're planning to execute pwned-by on someone else's machine, DO IT ETHICALLY! Ask for permission to conduct your activity with written instructions. Do not investigate someone else's files without permission. I do not promote any harm to other people. Please use it at your own risk! Author will not be responsible for any damage! This project is for study purposes only. Enjoy hacking!
+ This project aims to understand ethical hacking techniques using python backdoor tool from scratch. The tests and procedures should only be executed on your own machines. If you're planning to execute pwned-by on someone else's machine, DO IT ETHICALLY! Ask for permission to conduct your activity with written instructions. Do not investigate someone else's files without permission. I do not promote any harm to other people. Please use it at your own risk! Author will not be responsible for any damage! This project is for study purposes only. Enjoy hacking!
   
   
   
