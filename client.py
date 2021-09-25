@@ -22,5 +22,4 @@ client = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # concatinating ip an
 
 # since the server is now 
 client.connect() # >>>>>>>>>>>>>>> initiate 3 way handshake to the servere, returning back to server.py >>>>>>>>>>>> 
-
 # pwning tmrw!
