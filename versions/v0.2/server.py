@@ -26,3 +26,4 @@ server.listen(5) # 5 is queue size through the parameter backlog. Let's go to th
 client, ip = server.accept() # >>>>>>>>>>>>> coming back to this file to accept the connection request from the client.py that gives 2 variables; client = connection data, and ip = returns tuple of ip of the client and port
 
 # Now we received the ip and port, we can now start hacking the system!
+# pwning tmrw!
