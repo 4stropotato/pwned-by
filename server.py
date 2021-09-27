@@ -11,18 +11,25 @@ def ip_address():
     serv_ip.close()
     return server_ip
 
-########################
+#########################
 
 server_ip = ip_address() # we can change the server ip to any ip from our machine. ie. 192.168.1.8
 server_port = 5555 # v0.2 We can choose any available ports on 65535 or 1111111111111111 in binary
 
-########################
+#########################
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # We're going to concatenate our IPv4 (AF_INET) to our Transmission Control Protocol socket (SOCK_STREAM) or TCP. By the way (SOCK_DGRAM) is User Defind Protocol socket or UDP that is less reliable that TCP. 
 server.bind((server_ip,server_port)) # binding local end port's number to the ip
 
 # The server's port is open, we can now listen the the incoming connection, we can now listen to the incoming connections.
 server.listen(5) # 5 is queue size through the parameter backlog. Let's go to the client.py 1>>>>>>>>>
+
+#####   DELETABLE   #####
+
+from pathlib import Path               # THIS IS AN ALTERNATIVE WAY IF YOU WANT TO EXECUTE THE TWO FILES AT ONCE IF YOU'RE LAZY TO OPEN 2 SHELLS # You can delete this code if you liked to
+exec(Path('client.py').read_text())    # THIS IS AN ALTERNATIVE WAY IF YOU WANT TO EXECUTE THE TWO FILES AT ONCE IF YOU'RE LAZY TO OPEN 2 SHELLS # You can delete this code if you liked to
+
+#####   DELETABLE   #####
 
 client, ip = server.accept() # 2>>>>>>>>>> coming back to this file to accept the connection request from the client.py that gives 2 variables; client = connection data, and ip = returns tuple of ip of the client and port
 
