@@ -22,8 +22,15 @@ server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # We're going to conc
 server.bind((server_ip,server_port)) # binding local end port's number to the ip
 
 # The server's port is open, we can now listen the the incoming connection, we can now listen to the incoming connections.
-server.listen(5) # 5 is queue size through the parameter backlog. Let's go to the client.py >>>>>>>>>>
-client, ip = server.accept() # >>>>>>>>>>>>> coming back to this file to accept the connection request from the client.py that gives 2 variables; client = connection data, and ip = returns tuple of ip of the client and port
+server.listen(5) # 5 is queue size through the parameter backlog. Let's go to the client.py 1>>>>>>>>>
 
-# Now we received the ip and port, we can now start hacking the system!
+client, ip = server.accept() # 2>>>>>>>>>> coming back to this file to accept the connection request from the client.py that gives 2 variables; client = connection data, and ip = returns tuple of ip of the client and port
+
+# Now we received the ip and port...
+# Let's have a confirmation that the client is sending a message to our system 3>>>>>>>>>>>
+
+confirmation = client.recv(8).decode('utf-8') # 4>>>>>>>>>>>> Convert back the bytes to string and assign it to the variable confirmation
+print(confirmation) # Check if working!
+
+# if the message shows 'Connect!', the code is working and we can now start hacking the system!
 # pwning tmrw!
