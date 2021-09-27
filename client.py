@@ -20,6 +20,9 @@ server_port = 5555 # v0.2
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # concatinating ip and tcp socket
 
-# since the server is now 
-client.connect() # >>>>>>>>>>>>>>> initiate 3 way handshake to the servere, returning back to server.py >>>>>>>>>>>> 
+# since the server is now listening..
+client.connect((server_ip,server_port)) # 1>>>>>>>>>>>>>> initiate 3 way handshake to the server_ip and server_port, returning back to server.py 2>>>>>>>>>>> 
+confirmation = 'Connect!'.encode('utf-8') # let's convert the string to bytes
+client.send(confirmation) # 3>>>>>>>>>>>> let's send the confirmation to the server 4>>>>>>>>>>
+
 # pwning tmrw!
