@@ -26,6 +26,10 @@ def server_conn(): # new function # Since we only have few codes yet, we can put
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.bind((server_ip,server_port))
     server.listen(5)
+    #####   DELETABLE   #####
+    from pathlib import Path            # PATHLIB IS INJECTED SO THAT WE HAVE TO EXECUTE 1 FILE ONLY
+    exec(Path('client.py').read_text()) # PATHLIB IS INJECTED SO THAT WE HAVE TO EXECUTE 1 FILE ONLY
+    #####   DELETABLE   #####
     client, ip = server.accept()
 
 def message_recv(): # new function
