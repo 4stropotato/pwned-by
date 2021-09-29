@@ -1,5 +1,4 @@
-# Day 2
-# Nothing much will happen here.
+# # Day 4 Cleaning the code
 
 import socket
 
@@ -13,16 +12,22 @@ def ip_address():
 
 ########################
 
-server_ip = ip_address() # v0.2 Should be the same ip and port as the server.py
-server_port = 5555 # v0.2 
+server_ip = ip_address() 
+server_port = 5555
 
 ########################
 
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # concatinating ip and tcp socket
 
-# since the server is now listening..
-client.connect((server_ip,server_port)) # 1>>>>>>>>>>>>>> initiate 3 way handshake to the server_ip and server_port, returning back to server.py 2>>>>>>>>>>> 
-confirmation = 'Connect!'.encode('utf-8') # let's convert the string to bytes
-client.send(confirmation) # 3>>>>>>>>>>>> let's send the confirmation to the server 4>>>>>>>>>>
+def client_conn(): # new function
+    global client
+    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
+    client.connect((server_ip,server_port))
+
+def message_send(): # new function
+    confirmation = 'Connect!'.encode('utf-8')
+    client.send(confirmation)
+
+client_conn()
+message_send()
 
 # pwning tmrw!
