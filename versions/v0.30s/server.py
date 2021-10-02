@@ -1,6 +1,4 @@
-# Day 4 Cleaning the code
-# As a programmer, it is very important to make a clean code. (Readable and Organized) So it is important that we arrange our code according to it's functionality. 
-# Header sned/receive
+# Day 4 - Cleaning the code + sending message from client to server
 
 import socket
 
@@ -21,14 +19,14 @@ server_port = 5555
 
 
 
-def server_conn(): # new function # Since we only have few codes yet, we can put all the remaining code in a container where we can call to make a connection.
+def server_conn():
     global server,client,ip
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.bind((server_ip,server_port))
     server.listen(5)
     #####   DELETABLE   #####
-    from pathlib import Path            # PATHLIB IS INJECTED SO THAT WE HAVE TO EXECUTE 1 FILE ONLY
-    exec(Path('client.py').read_text()) # PATHLIB IS INJECTED SO THAT WE HAVE TO EXECUTE 1 FILE ONLY
+    from pathlib import Path
+    exec(Path('client.py').read_text())
     #####   DELETABLE   #####
     client, ip = server.accept()
 

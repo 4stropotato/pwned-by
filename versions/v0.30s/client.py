@@ -1,4 +1,4 @@
-# # Day 4 Cleaning the code
+# Day 4 - Cleaning the code + sending message from client to server
 
 import socket
 
@@ -18,12 +18,12 @@ server_port = 5555
 ########################
 
 
-def client_conn(): # new function
+def client_conn():
     global client
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
     client.connect((server_ip,server_port))
 
-def message_send(): # new function
+def message_send():
     confirmation = 'Connect!'.encode('utf-8')
     client.send(confirmation)
 
