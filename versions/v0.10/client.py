@@ -1,5 +1,5 @@
 # Day 1
-# Notice that it has the same code. Yes, because we are initializing the code to with the same ip address to communicate to each other
+# 2     Notice that it has the same code. Yes, because we are initializing the code to with the same ip address to communicate to each other
 
 import socket
 
@@ -14,4 +14,5 @@ def ip_address():
 server_ip = ip_address()
 
 print(server_ip)
+
 # pwning tmrw!
