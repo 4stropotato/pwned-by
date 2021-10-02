@@ -1,5 +1,4 @@
-# Day 5 Sending message (Client), Receiving (Server)
-
+# Day 6 Completing the Send/Receive functions for both scripts (single script won't work)
 
 import socket
 
@@ -19,16 +18,22 @@ server_port = 5555
 ########################
 
 
-# 2 making message_send function.
+def message_send(string, size):
+    body = string.encode('utf-8')
+    length = len(body)
+    header = str(length).encode('utf-8')
+    header += b' ' * (size - len(header))
+    client.send(header)
+    client.send(body)
 
-def message_send(string, size): # 3
-    body = string.encode('utf-8') # 4
-    length = len(body) # 5
-    header = str(length).encode('utf-8') # 6
-    header += b' ' * (size - len(header)) # 7
-    client.send(header) # 8
-    client.send(body) # 9
-    # 10 let's go to the server.py
+def message_recv(size): # 2
+    while True:
+        header = client.recv(size).decode('utf-8')
+        if header:
+            body_size = int(header)
+            body = client.recv(body_size).decode('utf-8')
+            break
+    return body
 
 
 def client_conn():
@@ -40,27 +45,16 @@ def client_conn():
 client_conn()
 
 # testing
-message_send('Connected!', 2)
+print(message_recv(2))
 
-message_send('4stropotato', 2)
+print(message_recv(2))
 
-message_send('If you were able to print this from the server, You are awesome!', 2)
+print(message_recv(2))
 
+#########################
 
+# 2     Receiving the message from the server
 
-########################
-
-# 3 new function with param string(message), and the size of bytes so that the server will know how much packet it has to receive.
-# 4 we have to convert it to bytes so that every machine would understand the message.
-# 5 counting the length of the string and,
-# 6 converting it again to bytes. ie. 'string' has a length of 5 and converting 5 into a byte, turning b'5' 
-# 7 adding spaces to the filler, ie. we gave the args 'string' as the string and 8 as the size.
-#   the length of string (b'5') is 1, so 8 - 1 = 7,
-#   we will make seven white spaces in bytes and add it to the filler. (b'5       ') <- this has 7 white spaces
-# 8 as we gave 8 bytes for the size, we will send an 8 bytes message to the server (b'5       ').
-#   We will send the filler first as the header so that the server will know how many packets it will be going to receive next time.
-# 9 now we will send the actual message.
-
-########################
+#########################
 
 # pwning tmrw!
