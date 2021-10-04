@@ -1,4 +1,4 @@
-# Day 6 Completing the Send/Receive functions for both scripts (single script won't work)
+# Day 7 - Making the message adaptable to any type.
 
 import socket
 
@@ -18,21 +18,32 @@ server_port = 5555
 ########################
 
 
-def message_send(string, size):
-    body = string.encode('utf-8')
+def message_send(string, size=8):
+    no_str = False
+    if type(string) != str:
+        string =str(string)
+        no_str = True
+    body = string.encode()
     length = len(body)
-    header = str(length).encode('utf-8')
+    header = str(length).encode()
     header += b' ' * (size - len(header))
     client.send(header)
     client.send(body)
+    if no_str == True:
+        client.send('T'.encode())
+    else:
+        client.send('F'.encode())
 
-def message_recv(size): # 2
+def message_recv(size=8):
     while True:
-        header = client.recv(size).decode('utf-8')
+        header = client.recv(size).decode()
         if header:
             body_size = int(header)
-            body = client.recv(body_size).decode('utf-8')
+            body = client.recv(body_size).decode()
+            no_str = client.recv(1).decode()
             break
+    if no_str == 'T':
+        body = eval(body)
     return body
 
 
@@ -45,16 +56,9 @@ def client_conn():
 client_conn()
 
 # testing
-print(message_recv(2))
+message_send(123)
+message_send('123')
+message_send([123])
 
-print(message_recv(2))
-
-print(message_recv(2))
-
-#########################
-
-# 2     Receiving the message from the server
-
-#########################
 
 # pwning tmrw!

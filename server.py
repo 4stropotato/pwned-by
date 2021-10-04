@@ -1,4 +1,6 @@
-# Day 6 Completing the Send/Receive functions for both scripts (single script won't work)
+# Day 7 - Making the message adaptable to any type.
+# 1     There are cases that we like to send message other than string like integer, float, list, tuple, or dictionary.
+#       We could mess our code if we are going to derive it again manually so I decided to make it automated.
 
 import socket
 
@@ -18,21 +20,32 @@ server_port = 5555
 #########################
 
 
-def message_send(string, size): # 1
-    body = string.encode('utf-8')
+def message_send(string, size=8): # 2
+    no_str = False # 3
+    if type(string) != str: # 4
+        string =str(string)
+        no_str = True # 5
+    body = string.encode()
     length = len(body)
-    header = str(length).encode('utf-8')
+    header = str(length).encode()
     header += b' ' * (size - len(header))
     client.send(header)
     client.send(body)
+    if no_str == True: # 6
+        client.send('T'.encode())
+    else:
+        client.send('F'.encode())
 
-def message_recv(size):
+def message_recv(size=8):
     while True:
-        header = client.recv(size).decode('utf-8')
+        header = client.recv(size).decode()
         if header:
             body_size = int(header)
-            body = client.recv(body_size).decode('utf-8')
+            body = client.recv(body_size).decode()
+            no_str = client.recv(1).decode() # 7
             break
+    if no_str == 'T': # 8
+        body = eval(body)
     return body
 
 def server_conn():
@@ -40,20 +53,37 @@ def server_conn():
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.bind((server_ip,server_port))
     server.listen(5)
+    #####   DELETABLE   #####
+    from pathlib import Path     
+    exec(Path('client.py').read_text())
+    #####   DELETABLE   #####
     client, ip = server.accept()
 
 server_conn()
 
 # testing
-message_send('Connected!', 2)
+msg1 = message_recv()
+msg2 = message_recv()
+msg3 = message_recv()
 
-message_send('4stropotato', 2)
+print(msg1)
+print(type(msg1))
 
-message_send('If you were able to print this from the server, You are awesome!', 2)
+print(msg2)
+print(type(msg2))
+
+print(msg3)
+print(type(msg3))
 
 #########################
 
-# 1     We are going to send a message to the client this time.
+# 2     We are giving the default parameter (size = 8) if size were not given, if .encode() is empty, it will automatically format it to 'utf-8'.
+# 3     We will be going to set a variable that is always false, ( becase the default is string )
+# 4     If the message is not string, then we will make it a string. ( very straight forward )
+# 5     But we are going to change the no_str variable to become true as an exchange
+# 6     If it is True, we are going to send an additional message that contains 'T' or 'F'( True of False )
+# 7     Before we break the loop, We are going to receive the 'T' or 'F' message and assign it back to no_str
+# 8     Now if no_str is True, We are going to evaluate the body to return it's true type.
 
 #########################
 
