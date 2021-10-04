@@ -1,5 +1,4 @@
-# Day 5 Sending message (Client), Receiving (Server)
-
+# Day 5 - Sending message (Client), Receiving (Server)
 
 import socket
 
@@ -45,8 +44,6 @@ message_send('Connected!', 2)
 message_send('4stropotato', 2)
 
 message_send('If you were able to print this from the server, You are awesome!', 2)
-
-
 
 ########################
 

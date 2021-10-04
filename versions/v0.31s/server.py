@@ -1,4 +1,4 @@
-# Day 5 Sending message (Client), Receiving (Server)
+# Day 5 - Sending message (Client), Receiving (Server)
 #1 Today, we are going to start a conversation within the connection we had made. To make it more understandable, we will move to the client.py to make a message_send function. 
 
 import socket
@@ -47,7 +47,6 @@ print(message_recv(2))
 print(message_recv(2))
 
 print(message_recv(2))
-
 
 #########################
 
