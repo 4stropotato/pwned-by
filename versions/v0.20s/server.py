@@ -25,8 +25,8 @@ server.listen(5)
 
 #####   DELETABLE   #####
 
-from pathlib import Path               # ( OPTIONAL )
-exec(Path('client.py').read_text())  # ( OPTIONAL )
+from pathlib import Path            # ( OPTIONAL )
+exec(Path('client.py').read_text()) # ( OPTIONAL )
 
 #####   DELETABLE   #####
 

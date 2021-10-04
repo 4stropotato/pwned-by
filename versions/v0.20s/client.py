@@ -1,4 +1,4 @@
-# Day 3 - Making a the files to execute at the same time
+# Day 3 - Making a the files to execute at the same time.
 
 import socket
 
