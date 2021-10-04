@@ -1,4 +1,4 @@
-# Day 6 Completing the Send/Receive functions for both scripts (single script won't work)
+# Day 6 - Completing the Send/Receive functions for both scripts (single script won't work)
 
 import socket
 
