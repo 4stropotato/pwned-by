@@ -1,4 +1,4 @@
-# Day 1
+# Day 1 - getting your own ipaddress in python
 # 2     Notice that it has the same code. Yes, because we are initializing the code to with the same ip address to communicate to each other
 
 import socket

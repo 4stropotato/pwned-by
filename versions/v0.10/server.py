@@ -1,4 +1,4 @@
-# Day 1 getting your own ipaddress in python..
+# Day 1 - getting your own ipaddress in python
 # 1     ALthough there are many easy ways, this is the most effective way to get the ip of your own system using python.
 
 import socket
