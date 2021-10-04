@@ -1,4 +1,4 @@
-# Day 2
+# Day 2 - The socket module
 # 7 Nothing much will happen here.
 
 import socket

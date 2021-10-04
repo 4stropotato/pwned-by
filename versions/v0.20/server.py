@@ -1,4 +1,4 @@
-# Day 2 The socket module
+# Day 2 - The socket module
 # 1     As you noticed, we already used socket module as on the first day. The socket module is the core module that we are using since this course is more about networking.
 
 import socket
