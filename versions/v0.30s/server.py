@@ -1,4 +1,4 @@
-# Day 4 - Cleaning the code + sending message from client to server
+# Day 4 - Cleaning the code + sending message from client to server (Single Execute)
 
 import socket
 
@@ -16,7 +16,6 @@ server_ip = ip_address()
 server_port = 5555 
 
 #########################
-
 
 
 def server_conn():
