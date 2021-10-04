@@ -1,5 +1,5 @@
 # Day 4 - Cleaning the code + sending message from client to server
-#       1 As a programmer, it is very important to make a clean code. (Readable and Organized) So it is important that we arrange our code according to it's functionality. 
+#       1 As a programmer, it is very important to make a clean code. (Readable and Organized) So it is important that we arrange our code according to it's functionality
 
 import socket
 
@@ -17,8 +17,6 @@ server_ip = ip_address()
 server_port = 5555 
 
 #########################
-
-
 
 def server_conn(): # 1
     global server,client,ip
