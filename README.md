@@ -26,9 +26,10 @@ ie.
  *** [Tutorial] ***
 
  Please see the versions folder to learn the step-by-step procedure. https://github.com/4stropotato/pwned-by/tree/main/versions
+ Always open server.py file before client.py
+ Most of the comments are in the bottom.
 
-
- If you like to contribute to the project, please contact me on instagram or twitter. https://instagram.com/4stropotato | https://twitter.com/4stropotato
+ If you like to contribute/found a wrong code/or want to teach me better way of coding, please contact me on instagram or twitter. https://instagram.com/4stropotato | https://twitter.com/4stropotato
 
 pwned-by,
 4stropotato
