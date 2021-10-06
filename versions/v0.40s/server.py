@@ -20,7 +20,7 @@ server_port = 5555
 
 #########################
 
-def json_send(): # 3
+def json_send(data): # 3
     jsondata = json.dumps(data) # 4
     client.send(jsondata.encode()) # 5
 
@@ -62,7 +62,7 @@ def message_recv(size=8):
         body = eval(body)
     return body
 
-def server_conn():
+def connection(): # 10
     global server,client,ip
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.bind((server_ip,server_port))
@@ -73,7 +73,7 @@ def server_conn():
     #####   DELETABLE   #####
     client, ip = server.accept()
 
-server_conn()
+connection()
 
 # testing
 
@@ -90,6 +90,7 @@ server_conn()
 #       If we received, we will be going to encode it and strip the white space from the right to avoid unnecessary white spaces.
 #       and then, we are appending the chunk to the (data = ''). and return the the entire chunk by loading the dump (json.load())
 # 9     If it returns a ValueError while we are still receiving a data, continue the iteration. (kinda tricking the machine in a different way)
+# 10    Renamed to "connection" also in the client.py
 
 # Q     What is this json tool for?
 #       - We need this tool for larger outputs.
