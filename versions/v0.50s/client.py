@@ -97,7 +97,6 @@ def connection():
 connection()
 
 
-
 ########################
 
 # 9     We are going to decode the given cxommand using the new functions json_send/json_recv
@@ -108,9 +107,8 @@ connection()
 #       and whatever the result is going to assigned to the 'execute' variable
 # 11    now, in order to send it back to the server, we have to read the output from the invisible command prompt, and assign it to result.
 # 12    since it is encoded, we have to decode it first.
-# 13    and then we are going to send the output using json_send to back to the server.
+# 13    and then we are going to send the output using json_send to back to the server
 
 ########################
-
 
 # pwning tmrw!

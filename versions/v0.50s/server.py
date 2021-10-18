@@ -1,6 +1,6 @@
 # Day 9 - Creating the Shell
 # 1     Before we proceed to make the shell, let's think what are the commands that we needed for our goal.
-#       the common one's are 'cd' for changing directory and 'ls' for listing all the items in current directory.
+#       the common commands are 'cd' for changing directory and 'ls' for listing all the items in current directory.
 #       Additionally, we are going to create 'clear' and 'quit'
       
 import socket
@@ -83,8 +83,6 @@ def shell(): # 4
             print(result)   
 
 
-
-
 def connection():
     global server,client,ip
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -97,8 +95,8 @@ def connection():
     client, ip = server.accept()
     shell() # 3
 
-connection()
 
+connection()
 
 
 #########################
